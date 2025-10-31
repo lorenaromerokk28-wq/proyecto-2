@@ -1,0 +1,453 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CV - Lorena Itatí Romero</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 20px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+            overflow: hidden;
+        }
+
+        .header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 40px 30px 30px;
+            text-align: center;
+            position: relative;
+        }
+
+        .photo-container {
+            width: 150px;
+            height: 150px;
+            margin: 0 auto 20px;
+            border-radius: 50%;
+            overflow: hidden;
+            border: 5px solid white;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+            background: #f0f0f0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 60px;
+            color: #667eea;
+        }
+
+        .photo-container img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        h1 {
+            font-size: 2.5em;
+            margin-bottom: 10px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.2);
+        }
+
+        .subtitle {
+            font-size: 1.3em;
+            opacity: 0.95;
+            font-weight: 300;
+        }
+
+        .location {
+            margin-top: 10px;
+            font-size: 1.1em;
+            opacity: 0.9;
+        }
+
+        .buttons {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            display: flex;
+            gap: 10px;
+            z-index: 1000;
+        }
+
+        .btn {
+            padding: 12px 24px;
+            border: none;
+            border-radius: 50px;
+            cursor: pointer;
+            font-size: 16px;
+            font-weight: 600;
+            transition: all 0.3s;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+        }
+
+        .btn-whatsapp {
+            background: #25D366;
+            color: white;
+        }
+
+        .btn-whatsapp:hover {
+            background: #20BA5A;
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(37, 211, 102, 0.4);
+        }
+
+        .btn-pdf {
+            background: #ff6b6b;
+            color: white;
+        }
+
+        .btn-pdf:hover {
+            background: #ee5a52;
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(255, 107, 107, 0.4);
+        }
+
+        .content {
+            padding: 40px;
+        }
+
+        .section {
+            margin-bottom: 35px;
+            animation: fadeIn 0.6s ease-in;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .section-title {
+            color: #667eea;
+            font-size: 1.8em;
+            margin-bottom: 20px;
+            padding-bottom: 10px;
+            border-bottom: 3px solid #667eea;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .skills-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 15px;
+        }
+
+        .skill-card {
+            background: linear-gradient(135deg, #667eea15 0%, #764ba215 100%);
+            padding: 20px;
+            border-radius: 15px;
+            border-left: 4px solid #667eea;
+            transition: all 0.3s;
+            cursor: default;
+        }
+
+        .skill-card:hover {
+            transform: translateX(5px);
+            box-shadow: 0 5px 15px rgba(102, 126, 234, 0.2);
+        }
+
+        .skill-name {
+            font-weight: 600;
+            color: #333;
+            font-size: 1.1em;
+            margin-bottom: 5px;
+        }
+
+        .skill-desc {
+            color: #666;
+            font-size: 0.9em;
+            line-height: 1.4;
+        }
+
+        .experience-item {
+            background: #f8f9fa;
+            padding: 25px;
+            border-radius: 15px;
+            margin-bottom: 20px;
+            border-left: 4px solid #764ba2;
+            transition: all 0.3s;
+        }
+
+        .experience-item:hover {
+            box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+            transform: translateY(-2px);
+        }
+
+        .experience-title {
+            color: #764ba2;
+            font-size: 1.3em;
+            font-weight: 600;
+            margin-bottom: 8px;
+        }
+
+        .experience-company {
+            color: #667eea;
+            font-size: 1.1em;
+            margin-bottom: 5px;
+        }
+
+        .experience-date {
+            color: #888;
+            font-size: 0.9em;
+            margin-bottom: 15px;
+        }
+
+        .experience-desc {
+            color: #555;
+            line-height: 1.6;
+        }
+
+        .contact-info {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 15px;
+        }
+
+        .contact-item {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            padding: 15px;
+            background: #f8f9fa;
+            border-radius: 10px;
+        }
+
+        .icon {
+            font-size: 1.5em;
+        }
+
+        @media print {
+            .buttons { display: none; }
+            body { background: white; padding: 0; }
+            .container { box-shadow: none; }
+        }
+
+        @media (max-width: 768px) {
+            .buttons {
+                position: static;
+                justify-content: center;
+                margin-bottom: 20px;
+            }
+
+            h1 { font-size: 2em; }
+            .subtitle { font-size: 1.1em; }
+            .content { padding: 25px; }
+            .skills-grid { grid-template-columns: 1fr; }
+        }
+    </style>
+</head>
+<body>
+    <div class="buttons">
+        <a href="https://wa.me/5493764000000?text=Hola%20Lorena,%20vi%20tu%20CV" class="btn btn-whatsapp" target="_blank">
+            📱 WhatsApp
+        </a>
+        <button onclick="downloadPDF()" class="btn btn-pdf">
+            📄 Descargar PDF
+        </button>
+    </div>
+
+    <div class="container" id="cv-content">
+        <div class="header">
+            <div class="photo-container">
+                <span>👤</span>
+            </div>
+            <h1>Lorena Itatí Romero</h1>
+            <div class="subtitle">Especialista en Área Comercial</div>
+            <div class="location">📍 Posadas, Misiones, Argentina</div>
+        </div>
+
+        <div class="content">
+            <div class="section">
+                <h2 class="section-title">💼 Perfil Profesional</h2>
+                <p style="color: #555; line-height: 1.8; font-size: 1.05em;">
+                    Profesional del área comercial con marcada orientación a resultados y excelente capacidad para establecer relaciones estratégicas. Destaco por mi habilidad para identificar oportunidades de negocio, gestionar carteras de clientes y alcanzar objetivos de ventas. Mi enfoque proactivo y mi capacidad para trabajar bajo presión me permiten adaptarme rápidamente a entornos dinámicos y contribuir al crecimiento empresarial.
+                </p>
+            </div>
+
+            <div class="section">
+                <h2 class="section-title">⭐ Habilidades Principales</h2>
+                <div class="skills-grid">
+                    <div class="skill-card">
+                        <div class="skill-name">🎯 Orientación a Resultados</div>
+                        <div class="skill-desc">Enfoque constante en el cumplimiento y superación de metas comerciales</div>
+                    </div>
+                    <div class="skill-card">
+                        <div class="skill-name">🤝 Negociación Estratégica</div>
+                        <div class="skill-desc">Capacidad para cerrar acuerdos beneficiosos y mantener relaciones duraderas</div>
+                    </div>
+                    <div class="skill-card">
+                        <div class="skill-name">📊 Análisis de Mercado</div>
+                        <div class="skill-desc">Interpretación de tendencias y comportamiento del consumidor</div>
+                    </div>
+                    <div class="skill-card">
+                        <div class="skill-name">🎨 Pensamiento Innovador</div>
+                        <div class="skill-desc">Generación de soluciones novedosas ante desafíos comerciales</div>
+                    </div>
+                    <div class="skill-card">
+                        <div class="skill-name">💪 Proactividad</div>
+                        <div class="skill-desc">Iniciativa para identificar y aprovechar oportunidades de negocio</div>
+                    </div>
+                    <div class="skill-card">
+                        <div class="skill-name">🔄 Flexibilidad</div>
+                        <div class="skill-desc">Ajuste rápido a cambios en el mercado y estrategias comerciales</div>
+                    </div>
+                    <div class="skill-card">
+                        <div class="skill-name">👥 Gestión de Clientes</div>
+                        <div class="skill-desc">Construcción y mantenimiento de relaciones comerciales sólidas</div>
+                    </div>
+                    <div class="skill-card">
+                        <div class="skill-name">🚀 Dinamismo</div>
+                        <div class="skill-desc">Energía y entusiasmo para impulsar acciones comerciales efectivas</div>
+                    </div>
+                    <div class="skill-card">
+                        <div class="skill-name">📈 Desarrollo de Estrategias</div>
+                        <div class="skill-desc">Planificación e implementación de tácticas de ventas exitosas</div>
+                    </div>
+                    <div class="skill-card">
+                        <div class="skill-name">💬 Comunicación Persuasiva</div>
+                        <div class="skill-desc">Habilidad para presentar propuestas de valor convincentes</div>
+                    </div>
+                    <div class="skill-card">
+                        <div class="skill-name">⚡ Toma de Decisiones Ágil</div>
+                        <div class="skill-desc">Resolución efectiva en situaciones comerciales cambiantes</div>
+                    </div>
+                    <div class="skill-card">
+                        <div class="skill-name">🌟 Actitud Positiva</div>
+                        <div class="skill-desc">Mentalidad constructiva que inspira confianza en clientes y equipo</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="section">
+                <h2 class="section-title">💼 Experiencia Profesional</h2>
+                <div class="experience-item">
+                    <div class="experience-title">Ejecutiva de Ventas</div>
+                    <div class="experience-company">Empresa del Sector Comercial</div>
+                    <div class="experience-date">2020 - Presente</div>
+                    <div class="experience-desc">
+                        • Gestión integral de cartera de clientes B2B y B2C<br>
+                        • Desarrollo e implementación de estrategias de captación<br>
+                        • Cumplimiento y superación de objetivos mensuales de ventas<br>
+                        • Análisis de mercado y competencia para identificar oportunidades<br>
+                        • Negociación de contratos y acuerdos comerciales
+                    </div>
+                </div>
+            </div>
+
+            <div class="section">
+                <h2 class="section-title">🎓 Formación Académica</h2>
+                <div class="experience-item">
+                    <div class="experience-title">Formación en Ventas y Comercialización</div>
+                    <div class="experience-company">Institución Educativa</div>
+                    <div class="experience-date">Año de finalización</div>
+                </div>
+            </div>
+
+            <div class="section">
+                <h2 class="section-title">📞 Información de Contacto</h2>
+                <div class="contact-info">
+                    <div class="contact-item">
+                        <span class="icon">📍</span>
+                        <div>
+                            <strong>Ubicación</strong><br>
+                            Posadas, Misiones
+                        </div>
+                    </div>
+                    <div class="contact-item">
+                        <span class="icon">📱</span>
+                        <div>
+                            <strong>Teléfono</strong><br>
+                            +54 9 376 400-0000
+                        </div>
+                    </div>
+                    <div class="contact-item">
+                        <span class="icon">✉️</span>
+                        <div>
+                            <strong>Email</strong><br>
+                            lorena.romero@email.com
+                        </div>
+                    </div>
+                    <div class="contact-item">
+                        <span class="icon">💼</span>
+                        <div>
+                            <strong>LinkedIn</strong><br>
+                            linkedin.com/in/lorenaromero
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function downloadPDF() {
+            const element = document.getElementById('cv-content');
+            const buttons = document.querySelector('.buttons');
+            
+            buttons.style.display = 'none';
+            
+            const opt = {
+                margin: 0,
+                filename: 'CV_Lorena_Itati_Romero.pdf',
+                image: { type: 'jpeg', quality: 0.98 },
+                html2canvas: { 
+                    scale: 2,
+                    useCORS: true,
+                    logging: false
+                },
+                jsPDF: { 
+                    unit: 'mm', 
+                    format: 'a4', 
+                    orientation: 'portrait',
+                    compress: true
+                }
+            };
+
+            html2pdf().set(opt).from(element).save().then(() => {
+                buttons.style.display = 'flex';
+            });
+        }
+
+        document.addEventListener('DOMContentLoaded', function() {
+            const photoContainer = document.querySelector('.photo-container');
+            photoContainer.addEventListener('click', function() {
+                const input = document.createElement('input');
+                input.type = 'file';
+                input.accept = 'image/*';
+                input.onchange = function(e) {
+                    const file = e.target.files[0];
+                    if (file) {
+                        const reader = new FileReader();
+                        reader.onload = function(event) {
+                            photoContainer.innerHTML = `<img src="${event.target.result}" alt="Foto de perfil">`;
+                        };
+                        reader.readAsDataURL(file);
+                    }
+                };
+                input.click();
+            });
+        });
+    </script>
+</body>
+</html>
