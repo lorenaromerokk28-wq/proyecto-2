@@ -1,3 +1,3 @@
 # proyecto-2
 conectar CLAUDE-GITHUB-NETLIFY
-[[cv-hcgalvan](https://proyectoro3.netlify.app/)]
+[[cv-lorenaitati](https://proyectoro3.netlify.app/)]
